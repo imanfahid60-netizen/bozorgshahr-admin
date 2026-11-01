@@ -322,7 +322,17 @@ tr:last-child td{border-bottom:0}
             </div>
             <div class="field">
               <label>مقدار سکه جایزه</label>
-              <input id="rewardCoins" type="number" min="0" placeholder="مثلاً ۵۰۰">
+              <input id="rewardCoins" type="number" min="0" step="1" placeholder="مثلاً ۵۰۰">
+            </div>
+            <div class="field">
+              <label>تاریخ و ساعت انقضا</label>
+              <input id="rewardExpiresAt" type="datetime-local">
+              <small class="notice">خالی بماند یعنی کد تاریخ انقضا ندارد.</small>
+            </div>
+            <div class="field">
+              <label>حداکثر تعداد کل استفاده</label>
+              <input id="rewardMaxUses" type="number" min="0" step="1" value="0">
+              <small class="notice">عدد صفر یعنی استفاده نامحدود.</small>
             </div>
           </div>
 
@@ -343,12 +353,15 @@ tr:last-child td{border-bottom:0}
                 <tr>
                   <th>کد</th>
                   <th>جایزه</th>
+                  <th>استفاده‌شده</th>
+                  <th>باقی‌مانده</th>
+                  <th>انقضا</th>
                   <th>وضعیت</th>
                   <th>عملیات</th>
                 </tr>
               </thead>
               <tbody id="rewardsTable">
-                <tr><td colspan="4" class="empty">در حال دریافت اطلاعات...</td></tr>
+                <tr><td colspan="7" class="empty">در حال دریافت اطلاعات...</td></tr>
               </tbody>
             </table>
           </div>
@@ -359,7 +372,7 @@ tr:last-child td{border-bottom:0}
 </section>
 
 <div id="modalRoot"></div>
-  
+
 <script>
 const API = "https://bozorgshahr-reward-api.onrender.com";
 
@@ -385,6 +398,16 @@ applyTheme(localStorage.getItem("bozorgshahr-admin-theme") || "dark");
 
 function faNumber(value) {
   return Number(value || 0).toLocaleString("fa-IR");
+}
+
+function formatDateTime(value) {
+  if (!value) return "بدون انقضا";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "نامشخص";
+  return date.toLocaleString("fa-IR", {
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit"
+  });
 }
 
 function showMessage(id, message, success = false) {
@@ -417,8 +440,7 @@ async function api(path, options = {}) {
 
   return data;
 }
-
-// ورود مدیر
+  // ورود مدیر
 async function login() {
   const username = $("username").value.trim();
   const password = $("password").value;
@@ -730,20 +752,36 @@ function closeModal() {
 async function createReward() {
   const code = $("rewardCode").value.trim().normalize("NFC").toUpperCase();
   const coins = Number($("rewardCoins").value);
+  const maxUses = Number($("rewardMaxUses").value);
+  const expiresInput = $("rewardExpiresAt").value;
 
   if (!code || !Number.isSafeInteger(coins) || coins < 0) {
     showMessage("rewardMessage", "نام کد و مقدار معتبر سکه را وارد کنید.");
     return;
   }
 
+  if (!Number.isSafeInteger(maxUses) || maxUses < 0 || maxUses > 2147483647) {
+    showMessage("rewardMessage", "سقف استفاده باید عدد صحیح صفر یا بیشتر باشد.");
+    return;
+  }
+
+  if (expiresInput && (!Number.isFinite(Date.parse(expiresInput)) || Date.parse(expiresInput) <= Date.now())) {
+    showMessage("rewardMessage", "تاریخ انقضا باید در آینده باشد.");
+    return;
+  }
+
+  const expiresAt = expiresInput ? new Date(expiresInput).toISOString() : null;
+
   try {
     await api("/api/admin/reward-codes", {
       method: "POST",
-      body: JSON.stringify({ code, coins })
+      body: JSON.stringify({ code, coins, expiresAt, maxUses })
     });
 
     $("rewardCode").value = "";
     $("rewardCoins").value = "";
+    $("rewardExpiresAt").value = "";
+    $("rewardMaxUses").value = "0";
     showMessage("rewardMessage", "کد جایزه با موفقیت ساخته شد.", true);
 
     await loadRewards();
@@ -756,7 +794,7 @@ async function createReward() {
 // دریافت کدهای جایزه
 async function loadRewards() {
   $("rewardsTable").innerHTML =
-    '<tr><td colspan="4" class="empty">در حال دریافت اطلاعات...</td></tr>';
+    '<tr><td colspan="7" class="empty">در حال دریافت اطلاعات...</td></tr>';
 
   try {
     const result = await api("/api/admin/reward-codes");
@@ -764,7 +802,7 @@ async function loadRewards() {
     renderRewards();
   } catch (error) {
     $("rewardsTable").innerHTML =
-      `<tr><td colspan="4" class="empty">${escapeHTML(error.message)}</td></tr>`;
+      `<tr><td colspan="7" class="empty">${escapeHTML(error.message)}</td></tr>`;
   }
 }
 
@@ -772,27 +810,52 @@ async function loadRewards() {
 function renderRewards() {
   if (!rewards.length) {
     $("rewardsTable").innerHTML =
-      '<tr><td colspan="4" class="empty">هنوز کدی ساخته نشده است.</td></tr>';
+      '<tr><td colspan="7" class="empty">هنوز کدی ساخته نشده است.</td></tr>';
     return;
   }
 
-  $("rewardsTable").innerHTML = rewards.map(reward => `
-    <tr>
-      <td>${escapeHTML(reward.code)}</td>
-      <td>${faNumber(reward.coins)} سکه</td>
-      <td>
-        <span class="status ${reward.active ? "" : "banned"}">
-          ${reward.active ? "فعال" : "غیرفعال"}
-        </span>
-      </td>
-      <td>
-        <button class="btn small-btn ${reward.active ? "btn-red" : "btn-green"}"
-          onclick="toggleReward('${escapeHTML(reward.id)}',${!reward.active})">
-          ${reward.active ? "غیرفعال کردن" : "فعال کردن"}
-        </button>
-      </td>
-    </tr>
-  `).join("");
+  $("rewardsTable").innerHTML = rewards.map(reward => {
+    const used = Number(reward.used_count ?? 0);
+    const maxUses = Number(reward.max_uses ?? 0);
+    const remaining = maxUses > 0
+      ? Math.max(0, Number(reward.remaining_uses ?? (maxUses - used)))
+      : null;
+
+    const expired = reward.expires_at &&
+      new Date(reward.expires_at).getTime() <= Date.now();
+
+    const exhausted = maxUses > 0 && remaining === 0;
+
+    let statusText = reward.active ? "فعال" : "غیرفعال";
+    let statusClass = reward.active ? "" : "banned";
+
+    if (reward.active && expired) {
+      statusText = "منقضی‌شده";
+      statusClass = "banned";
+    } else if (reward.active && exhausted) {
+      statusText = "تمام‌شده";
+      statusClass = "banned";
+    }
+
+    return `
+      <tr>
+        <td>${escapeHTML(reward.code)}</td>
+        <td>${faNumber(reward.coins)} سکه</td>
+        <td>${faNumber(used)}</td>
+        <td>${remaining === null ? "نامحدود" : faNumber(remaining)}</td>
+        <td>${escapeHTML(formatDateTime(reward.expires_at))}</td>
+        <td>
+          <span class="status ${statusClass}">${statusText}</span>
+        </td>
+        <td>
+          <button class="btn small-btn ${reward.active ? "btn-red" : "btn-green"}"
+            onclick="toggleReward('${escapeHTML(reward.id)}',${!reward.active})">
+            ${reward.active ? "غیرفعال کردن" : "فعال کردن"}
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
 }
 
 // تغییر وضعیت کد جایزه
