@@ -28,160 +28,384 @@
   --muted:#65748d;
 }
 :root.light .field input,:root.light .field select,
-:root.light .toolbar input { background:#f7f9fd;color:#17243a; }
+:root.light .toolbar input {
+  background:#f7f9fd;
+  color:#17243a;
+}
 :root.light td { color:#263650; }
 :root.light .nav-btn { color:#40516d; }
-:root.light .nav-btn.active,:root.light .nav-btn:hover { background:#e4ecfb;color:#17243a; }
-:root.light .login-screen { background:radial-gradient(circle at top,#dce8ff,#f2f5fb 65%); }
+:root.light .nav-btn.active,:root.light .nav-btn:hover {
+  background:#e4ecfb;
+  color:#17243a;
+}
+:root.light .login-screen {
+  background:radial-gradient(circle at top,#dce8ff,#f2f5fb 65%);
+}
 
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--text);
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
   font-family:Vazirmatn,Tahoma,sans-serif;
 }
-button,input,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-.login-screen{
-  min-height:100vh;display:flex;align-items:center;
-  justify-content:center;padding:20px;
+button,input,select { font:inherit; }
+button { cursor:pointer; }
+.hidden { display:none!important; }
+
+.login-screen {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
   background:radial-gradient(circle at top,#20365d,#0b1020 65%);
 }
-.login-card{
-  width:100%;max-width:410px;background:var(--panel);
-  border:1px solid var(--border);border-radius:22px;
-  padding:30px;box-shadow:0 25px 70px #0008;
+.login-card {
+  width:100%;
+  max-width:410px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:30px;
+  box-shadow:0 25px 70px #0008;
 }
-.logo{
-  width:65px;height:65px;border-radius:19px;
-  display:grid;place-items:center;margin:0 auto 15px;
+.logo {
+  width:65px;
+  height:65px;
+  border-radius:19px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 15px;
   background:linear-gradient(135deg,#5685ff,#8a5cff);
-  font-size:30px;font-weight:900;
+  font-size:30px;
+  font-weight:900;
 }
-h1,h2,h3,p{margin-top:0}
-.login-card h1{text-align:center;font-size:23px}
-.subtitle{text-align:center;color:var(--muted);font-size:13px}
-.field{margin:18px 0}
-.field label{display:block;font-size:13px;margin-bottom:8px;color:#b8c7df}
-.field input,.field select{
-  width:100%;padding:13px 14px;border-radius:11px;
-  border:1px solid var(--border);background:#0d1528;
-  color:white;outline:none;
+h1,h2,h3,p { margin-top:0; }
+.login-card h1 {
+  text-align:center;
+  font-size:23px;
 }
-.field input:focus,.field select:focus{border-color:var(--blue)}
-.btn{
-  border:0;border-radius:10px;padding:11px 17px;
-  color:white;background:var(--blue);font-weight:700;
+.subtitle {
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
 }
-.btn:hover{filter:brightness(1.12)}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.btn-block{width:100%;padding:14px}
-.btn-green{background:#168c68}
-.btn-red{background:#c94359}
-.btn-gray{background:#34435e}
-.message{font-size:13px;margin-top:13px;color:var(--red);min-height:20px}
-.app{min-height:100vh}
-.topbar{
-  height:72px;background:var(--panel);
+.field { margin:18px 0; }
+.field label {
+  display:block;
+  font-size:13px;
+  margin-bottom:8px;
+  color:#b8c7df;
+}
+.field input,.field select {
+  width:100%;
+  padding:13px 14px;
+  border-radius:11px;
+  border:1px solid var(--border);
+  background:#0d1528;
+  color:white;
+  outline:none;
+}
+.field input:focus,.field select:focus {
+  border-color:var(--blue);
+}
+.btn {
+  border:0;
+  border-radius:10px;
+  padding:11px 17px;
+  color:white;
+  background:var(--blue);
+  font-weight:700;
+}
+.btn:hover { filter:brightness(1.12); }
+.btn:disabled {
+  opacity:.5;
+  cursor:not-allowed;
+}
+.btn-block {
+  width:100%;
+  padding:14px;
+}
+.btn-green { background:#168c68; }
+.btn-red { background:#c94359; }
+.btn-gray { background:#34435e; }
+.message {
+  font-size:13px;
+  margin-top:13px;
+  color:var(--red);
+  min-height:20px;
+}
+.app { min-height:100vh; }
+.topbar {
+  height:72px;
+  background:var(--panel);
   border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 25px;position:sticky;top:0;z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  position:sticky;
+  top:0;
+  z-index:5;
 }
-.brand{display:flex;align-items:center;gap:12px;font-weight:800}
-.brand-icon{
-  width:42px;height:42px;border-radius:13px;
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:800;
+}
+.brand-icon {
+  width:42px;
+  height:42px;
+  border-radius:13px;
   background:linear-gradient(135deg,#5685ff,#8a5cff);
-  display:grid;place-items:center;font-size:21px;
+  display:grid;
+  place-items:center;
+  font-size:21px;
 }
-.top-actions{display:flex;align-items:center;gap:12px}
-.admin-label{color:var(--muted);font-size:13px}
-.layout{display:flex;min-height:calc(100vh - 72px)}
-.sidebar{
-  width:235px;background:var(--panel);
-  border-left:1px solid var(--border);padding:22px 13px;
+.top-actions {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.admin-label {
+  color:var(--muted);
+  font-size:13px;
+}
+.layout {
+  display:flex;
+  min-height:calc(100vh - 72px);
+}
+.sidebar {
+  width:235px;
+  background:var(--panel);
+  border-left:1px solid var(--border);
+  padding:22px 13px;
   flex-shrink:0;
 }
-.nav-title{color:#6f83a5;font-size:11px;padding:8px 13px}
-.nav-btn{
-  width:100%;border:0;background:transparent;color:#b5c4dd;
-  text-align:right;padding:13px;border-radius:11px;
-  margin:3px 0;display:flex;align-items:center;gap:12px;
+.nav-title {
+  color:#6f83a5;
+  font-size:11px;
+  padding:8px 13px;
 }
-.nav-btn.active,.nav-btn:hover{background:#263858;color:white}
-.nav-icon{font-size:18px;width:23px;text-align:center}
-.main{padding:27px;width:calc(100% - 235px);max-width:1500px;margin:auto}
-.page-title{font-size:23px;font-weight:800;margin-bottom:7px}
-.page-desc{font-size:13px;color:var(--muted);margin-bottom:25px}
-.stats{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:15px;margin-bottom:24px;
+.nav-btn {
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#b5c4dd;
+  text-align:right;
+  padding:13px;
+  border-radius:11px;
+  margin:3px 0;
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
-.stat-card,.content-card{
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:16px;padding:19px;
+.nav-btn.active,.nav-btn:hover {
+  background:#263858;
+  color:white;
 }
-.stat-card{min-height:125px}
-.stat-label{color:var(--muted);font-size:13px}
-.stat-value{font-size:29px;font-weight:800;margin-top:12px}
-.stat-icon{float:left;font-size:23px}
-.content-card{margin-bottom:20px}
-.card-heading{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:12px;margin-bottom:17px;flex-wrap:wrap;
+.nav-icon {
+  font-size:18px;
+  width:23px;
+  text-align:center;
 }
-.card-heading h3{font-size:16px;margin:0}
-.toolbar{display:flex;gap:9px;flex-wrap:wrap}
-.toolbar input{
-  background:#0d1528;border:1px solid var(--border);
-  color:white;border-radius:9px;padding:10px 12px;min-width:190px;
+.main {
+  padding:27px;
+  width:calc(100% - 235px);
+  max-width:1500px;
+  margin:auto;
 }
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;white-space:nowrap}
-th,td{text-align:right;padding:13px 11px;border-bottom:1px solid var(--border);font-size:13px}
-th{color:#91a2bd;font-weight:600}
-td{color:#e1eaff}
-tr:last-child td{border-bottom:0}
-.status{
-  display:inline-block;border-radius:20px;padding:4px 10px;
-  font-size:11px;background:#173d35;color:#55e0ac;
+.page-title {
+  font-size:23px;
+  font-weight:800;
+  margin-bottom:7px;
 }
-.status.banned{background:#48212d;color:#ff8192}
-.empty{text-align:center;color:var(--muted);padding:30px}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 15px}
-.actions{display:flex;gap:7px;flex-wrap:wrap}
-.small-btn{padding:7px 10px;font-size:12px}
-.notice{color:var(--muted);font-size:12px;line-height:2}
-.modal-bg{
-  position:fixed;inset:0;background:#0009;z-index:20;
-  display:flex;align-items:center;justify-content:center;padding:15px;
+.page-desc {
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:25px;
 }
-.modal{
-  background:var(--panel);border:1px solid var(--border);
-  border-radius:17px;padding:23px;width:100%;max-width:500px;
-  max-height:90vh;overflow:auto;
+.stats {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:15px;
+  margin-bottom:24px;
 }
-.modal h3{margin-bottom:18px}
-.modal-actions{display:flex;gap:9px;margin-top:15px}
-@media(max-width:900px){
-  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .sidebar{width:190px}
-  .main{width:calc(100% - 190px);padding:18px}
+.stat-card,.content-card {
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:19px;
 }
-@media(max-width:650px){
-  .topbar{padding:0 13px;height:62px}
-  .admin-label{display:none}
-  .layout{display:block}
-  .sidebar{
-    width:100%;display:flex;overflow-x:auto;padding:8px;
-    border-left:0;border-bottom:1px solid var(--border);
+.stat-card { min-height:125px; }
+.stat-label {
+  color:var(--muted);
+  font-size:13px;
+}
+.stat-value {
+  font-size:29px;
+  font-weight:800;
+  margin-top:12px;
+}
+.stat-icon {
+  float:left;
+  font-size:23px;
+}
+.content-card { margin-bottom:20px; }
+.card-heading {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:17px;
+  flex-wrap:wrap;
+}
+.card-heading h3 {
+  font-size:16px;
+  margin:0;
+}
+.toolbar {
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+.toolbar input {
+  background:#0d1528;
+  border:1px solid var(--border);
+  color:white;
+  border-radius:9px;
+  padding:10px 12px;
+  min-width:190px;
+}
+.table-wrap { overflow-x:auto; }
+table {
+  width:100%;
+  border-collapse:collapse;
+  white-space:nowrap;
+}
+th,td {
+  text-align:right;
+  padding:13px 11px;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+}
+th {
+  color:#91a2bd;
+  font-weight:600;
+}
+td { color:#e1eaff; }
+tr:last-child td { border-bottom:0; }
+.status {
+  display:inline-block;
+  border-radius:20px;
+  padding:4px 10px;
+  font-size:11px;
+  background:#173d35;
+  color:#55e0ac;
+}
+.status.banned {
+  background:#48212d;
+  color:#ff8192;
+}
+.empty {
+  text-align:center;
+  color:var(--muted);
+  padding:30px;
+}
+.form-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 15px;
+}
+.actions {
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.small-btn {
+  padding:7px 10px;
+  font-size:12px;
+}
+.notice {
+  color:var(--muted);
+  font-size:12px;
+  line-height:2;
+}
+.modal-bg {
+  position:fixed;
+  inset:0;
+  background:#0009;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+.modal {
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:23px;
+  width:100%;
+  max-width:500px;
+  max-height:90vh;
+  overflow:auto;
+}
+.modal h3 { margin-bottom:18px; }
+.modal-actions {
+  display:flex;
+  gap:9px;
+  margin-top:15px;
+}
+.ban-countdown {
+  display:block;
+  color:var(--yellow);
+  font-size:11px;
+  margin-top:5px;
+}
+@media(max-width:900px) {
+  .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .sidebar { width:190px; }
+  .main {
+    width:calc(100% - 190px);
+    padding:18px;
   }
-  .nav-title{display:none}
-  .nav-btn{width:auto;min-width:max-content;margin:0 3px;padding:10px}
-  .main{width:100%;padding:15px}
-  .stats{gap:9px}
-  .stat-card{padding:13px;min-height:105px}
-  .stat-value{font-size:23px}
-  .form-grid{grid-template-columns:1fr}
+}
+@media(max-width:650px) {
+  .topbar {
+    padding:0 13px;
+    height:62px;
+  }
+  .admin-label { display:none; }
+  .layout { display:block; }
+  .sidebar {
+    width:100%;
+    display:flex;
+    overflow-x:auto;
+    padding:8px;
+    border-left:0;
+    border-bottom:1px solid var(--border);
+  }
+  .nav-title { display:none; }
+  .nav-btn {
+    width:auto;
+    min-width:max-content;
+    margin:0 3px;
+    padding:10px;
+  }
+  .main {
+    width:100%;
+    padding:15px;
+  }
+  .stats { gap:9px; }
+  .stat-card {
+    padding:13px;
+    min-height:105px;
+  }
+  .stat-value { font-size:23px; }
+  .form-grid { grid-template-columns:1fr; }
 }
 </style>
 </head>
@@ -189,11 +413,16 @@ tr:last-child td{border-bottom:0}
 
 <section id="loginScreen" class="login-screen">
   <div class="login-card">
-    <div class="logo"><svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
-  <path d="M8 54V27l13-9v36M21 54V10l17 8v36M38 54V29l18-10v35M4 54h56"
-    fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M27 26h5M27 35h5M45 34h5M45 43h5" stroke="white" stroke-width="3" stroke-linecap="round"/>
-</svg></div>
+    <div class="logo">
+      <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
+        <path d="M8 54V27l13-9v36M21 54V10l17 8v36M38 54V29l18-10v35M4 54h56"
+          fill="none" stroke="white" stroke-width="4"
+          stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M27 26h5M27 35h5M45 34h5M45 43h5"
+          stroke="white" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+
     <h1>مدیریت بزرگشهر</h1>
     <p class="subtitle">به پنل مدیریت بازی بزرگشهر خوش آمدید</p>
 
@@ -201,11 +430,16 @@ tr:last-child td{border-bottom:0}
       <label>نام کاربری مدیر</label>
       <input id="username" autocomplete="username" placeholder="نام کاربری">
     </div>
+
     <div class="field">
       <label>رمز عبور</label>
       <input id="password" type="password" autocomplete="current-password" placeholder="رمز عبور">
     </div>
-    <button class="btn btn-block" id="loginBtn" onclick="login()">ورود به پنل مدیریت</button>
+
+    <button class="btn btn-block" id="loginBtn" onclick="login()">
+      ورود به پنل مدیریت
+    </button>
+
     <div id="loginMessage" class="message"></div>
   </div>
 </section>
@@ -213,13 +447,18 @@ tr:last-child td{border-bottom:0}
 <section id="app" class="app hidden">
   <header class="topbar">
     <div class="brand">
-      <div class="brand-icon"><svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
-  <path d="M8 54V27l13-9v36M21 54V10l17 8v36M38 54V29l18-10v35M4 54h56"
-    fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M27 26h5M27 35h5M45 34h5M45 43h5" stroke="white" stroke-width="3" stroke-linecap="round"/>
-</svg></div>
+      <div class="brand-icon">
+        <svg viewBox="0 0 64 64" width="34" height="34" aria-hidden="true">
+          <path d="M8 54V27l13-9v36M21 54V10l17 8v36M38 54V29l18-10v35M4 54h56"
+            fill="none" stroke="white" stroke-width="4"
+            stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M27 26h5M27 35h5M45 34h5M45 43h5"
+            stroke="white" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
       <span>بزرگشهر | مدیریت</span>
     </div>
+
     <div class="top-actions">
       <span class="admin-label">مدیر سیستم</span>
       <button class="btn btn-gray small-btn" id="themeBtn" onclick="toggleTheme()">حالت روشن</button>
@@ -230,12 +469,15 @@ tr:last-child td{border-bottom:0}
   <div class="layout">
     <aside class="sidebar">
       <div class="nav-title">مدیریت اصلی</div>
+
       <button class="nav-btn active" data-page="dashboard" onclick="showPage('dashboard',this)">
         <span class="nav-icon">▦</span> داشبورد
       </button>
+
       <button class="nav-btn" data-page="players" onclick="showPage('players',this)">
         <span class="nav-icon">👥</span> بازیکنان
       </button>
+
       <button class="nav-btn" data-page="rewards" onclick="showPage('rewards',this)">
         <span class="nav-icon">🎁</span> کدهای جایزه
       </button>
@@ -245,22 +487,26 @@ tr:last-child td{border-bottom:0}
       <section id="dashboardPage">
         <h2 class="page-title">داشبورد مدیریت</h2>
         <p class="page-desc">نمای کلی وضعیت بازی و حساب‌های بازیکنان</p>
+
         <div class="stats">
           <div class="stat-card">
             <span class="stat-icon">👥</span>
             <div class="stat-label">کل بازیکنان</div>
             <div class="stat-value" id="totalPlayers">۰</div>
           </div>
+
           <div class="stat-card">
             <span class="stat-icon">🚫</span>
             <div class="stat-label">بازیکنان مسدود</div>
             <div class="stat-value" id="bannedPlayers">۰</div>
           </div>
+
           <div class="stat-card">
             <span class="stat-icon">🎁</span>
             <div class="stat-label">کل کدهای جایزه</div>
             <div class="stat-value" id="totalCodes">۰</div>
           </div>
+
           <div class="stat-card">
             <span class="stat-icon">✅</span>
             <div class="stat-label">کدهای فعال</div>
@@ -269,7 +515,9 @@ tr:last-child td{border-bottom:0}
         </div>
 
         <div class="content-card">
-          <div class="card-heading"><h3>وضعیت ارتباط با سرور</h3></div>
+          <div class="card-heading">
+            <h3>وضعیت ارتباط با سرور</h3>
+          </div>
           <p id="serverStatus" class="notice">در انتظار دریافت اطلاعات...</p>
         </div>
       </section>
@@ -282,7 +530,8 @@ tr:last-child td{border-bottom:0}
           <div class="card-heading">
             <h3>فهرست بازیکنان</h3>
             <div class="toolbar">
-              <input id="playerSearch" placeholder="جست‌وجوی نام کاربری یا نام نمایشی"
+              <input id="playerSearch"
+                placeholder="جست‌وجوی نام کاربری یا نام نمایشی"
                 oninput="renderPlayers()">
               <button class="btn small-btn" onclick="loadPlayers()">به‌روزرسانی</button>
             </div>
@@ -310,18 +559,32 @@ tr:last-child td{border-bottom:0}
             <section id="rewardsPage" class="hidden">
         <h2 class="page-title">مدیریت کدهای جایزه</h2>
         <p class="page-desc">ساخت کدهای جایزه و کنترل فعال یا غیرفعال بودن آن‌ها</p>
+
         <div class="content-card">
           <h3>ساخت کد جایزه جدید</h3>
+
           <div class="form-grid">
             <div class="field">
               <label>نام کد جایزه</label>
               <input id="rewardCode" placeholder="مثلاً بزرگشهر۱۴۰۵" dir="auto">
             </div>
+
             <div class="field">
               <label>مقدار جایزه (سکه)</label>
               <input id="rewardCoins" type="number" min="0" placeholder="مثلاً ۵۰۰">
             </div>
+
+            <div class="field">
+              <label>تاریخ انقضا (شمسی - اختیاری، نمونه: ۱۴۰۵/۱۲/۲۹)</label>
+              <input id="rewardExpires" dir="ltr" inputmode="numeric" placeholder="۱۴۰۵/۱۲/۲۹">
+            </div>
+
+            <div class="field">
+              <label>حداکثر تعداد استفاده (۰ یعنی نامحدود)</label>
+              <input id="rewardMaxUses" type="number" min="0" step="1" value="0">
+            </div>
           </div>
+
           <button class="btn btn-green" onclick="createReward()">ساخت کد جایزه</button>
           <div id="rewardMessage" class="message"></div>
           <p class="notice">هر بازیکن می‌تواند هر کد را فقط یک بار استفاده کند.</p>
@@ -332,13 +595,19 @@ tr:last-child td{border-bottom:0}
             <h3>فهرست کدهای جایزه</h3>
             <button class="btn" onclick="loadRewards()">به‌روزرسانی</button>
           </div>
+
           <div class="table-wrap">
             <table>
               <thead>
-                <tr><th>کد</th><th>جایزه</th><th>وضعیت</th><th>عملیات</th></tr>
+                <tr>
+                  <th>کد</th>
+                  <th>جایزه</th>
+                  <th>وضعیت</th>
+                  <th>عملیات</th>
+                </tr>
               </thead>
               <tbody id="rewardsTable">
-                <tr><td colspan="4" class="empty">هنوز کدی ثبت نشده است.</td></tr>
+                <tr><td colspan="5" class="empty">هنوز کدی ثبت نشده است.</td></tr>
               </tbody>
             </table>
           </div>
@@ -349,6 +618,7 @@ tr:last-child td{border-bottom:0}
 </section>
 
 <div id="modalRoot"></div>
+
 <script>
 const API = "https://bozorgshahr-reward-api.onrender.com";
 
@@ -361,10 +631,16 @@ const $ = id => document.getElementById(id);
 function applyTheme(theme) {
   document.documentElement.classList.toggle("light", theme === "light");
   const button = $("themeBtn");
-  if (button) button.textContent = theme === "light" ? "حالت تیره" : "حالت روشن";
+  if (button) {
+    button.textContent = theme === "light" ? "حالت تیره" : "حالت روشن";
+  }
 }
+
 function toggleTheme() {
-  const next = document.documentElement.classList.contains("light") ? "dark" : "light";
+  const next = document.documentElement.classList.contains("light")
+    ? "dark"
+    : "light";
+
   localStorage.setItem("bozorgshahr-admin-theme", next);
   applyTheme(next);
 }
@@ -377,6 +653,8 @@ function faNumber(value) {
 
 function showMessage(id, message, success = false) {
   const el = $(id);
+  if (!el) return;
+
   el.textContent = message;
   el.style.color = success ? "#24c78a" : "#f05b70";
 }
@@ -387,7 +665,9 @@ async function api(path, options = {}) {
     ...(options.headers || {})
   };
 
-  if (token) headers.Authorization = "Bearer " + token;
+  if (token) {
+    headers.Authorization = "Bearer " + token;
+  }
 
   const response = await fetch(API + path, {
     ...options,
@@ -397,10 +677,13 @@ async function api(path, options = {}) {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    if (response.status === 401 || response.status === 403) {
-      if (response.status === 401) logout();
+    if (response.status === 401) {
+      logout();
     }
-    throw new Error(data.error || "ارتباط با سرور با مشکل روبه‌رو شد.");
+
+    throw new Error(
+      data.error || "ارتباط با سرور با مشکل روبه‌رو شد."
+    );
   }
 
   return data;
@@ -461,7 +744,9 @@ function showPage(page, button) {
     btn.classList.remove("active");
   });
 
-  if (button) button.classList.add("active");
+  if (button) {
+    button.classList.add("active");
+  }
 
   if (page === "players") loadPlayers();
   if (page === "rewards") loadRewards();
@@ -519,10 +804,22 @@ function renderPlayers() {
       <td>${faNumber(player.level)}</td>
       <td>
         <span class="status ${player.isBanned ? "banned" : ""}">
-          ${player.isBanned ? (player.banExpiresAt ? "مسدود موقت" : "مسدود دائمی") : "فعال"}
+          ${
+            player.isBanned
+              ? (player.banExpiresAt ? "مسدود موقت" : "مسدود دائمی")
+              : "فعال"
+          }
         </span>
-        ${player.isBanned && player.banExpiresAt ? `<small class="ban-countdown" data-expires="${escapeHTML(player.banExpiresAt)}">تا رفع مسدودی: --:--:--</small>` : ""}
-        ${player.isBanned && player.banReason ? `<small>دلیل: ${escapeHTML(player.banReason)}</small>` : ""}
+        ${
+          player.isBanned && player.banExpiresAt
+            ? `<small class="ban-countdown" data-expires="${escapeHTML(player.banExpiresAt)}">تا رفع مسدودی: --:--:--</small>`
+            : ""
+        }
+        ${
+          player.isBanned && player.banReason
+            ? `<small>دلیل: ${escapeHTML(player.banReason)}</small>`
+            : ""
+        }
       </td>
       <td>
         <div class="actions">
@@ -530,15 +827,16 @@ function renderPlayers() {
             onclick="editPlayer('${escapeHTML(player.id)}')">ویرایش</button>
           ${
             player.isBanned
-            ? `<button class="btn btn-green small-btn"
-                onclick="unbanPlayer('${escapeHTML(player.id)}')">رفع مسدودیت</button>`
-            : `<button class="btn btn-red small-btn"
-                onclick="banPlayer('${escapeHTML(player.id)}')">مسدودسازی</button>`
+              ? `<button class="btn btn-green small-btn"
+                  onclick="unbanPlayer('${escapeHTML(player.id)}')">رفع مسدودیت</button>`
+              : `<button class="btn btn-red small-btn"
+                  onclick="banPlayer('${escapeHTML(player.id)}')">مسدودسازی</button>`
           }
         </div>
       </td>
     </tr>
   `).join("");
+
   updateBanCountdowns();
 }
 
@@ -552,8 +850,7 @@ function escapeHTML(value) {
     "'": "&#39;"
   })[char]);
 }
-
-// نمایش پنجره ویرایش بازیکن
+  // نمایش پنجره ویرایش بازیکن
 function editPlayer(id) {
   const player = players.find(p => String(p.id) === String(id));
   if (!player) return;
@@ -711,29 +1008,146 @@ async function unbanPlayer(id) {
 function closeModal() {
   $("modalRoot").innerHTML = "";
 }
+  // تبدیل تاریخ شمسی به میلادی
+function jalaliToGregorian(jy, jm, jd) {
+  if (
+    jm < 1 || jm > 12 ||
+    jd < 1 ||
+    jd > (jm <= 6 ? 31 : jm <= 11 ? 30 : 30)
+  ) return null;
+
+  jy -= 979;
+
+  let jdn =
+    365 * jy +
+    Math.floor(jy / 33) * 8 +
+    Math.floor((jy % 33 + 3) / 4);
+
+  for (let i = 1; i < jm; i++) {
+    jdn += (i <= 6 ? 31 : 30);
+  }
+
+  jdn += jd - 1;
+
+  let gdn = jdn + 79;
+  let gy = 1600 + 400 * Math.floor(gdn / 146097);
+
+  gdn %= 146097;
+
+  let leap = true;
+
+  if (gdn >= 36525) {
+    gdn--;
+    gy += 100 * Math.floor(gdn / 36524);
+    gdn %= 36524;
+
+    if (gdn >= 365) {
+      gdn++;
+    } else {
+      leap = false;
+    }
+  }
+
+  gy += 4 * Math.floor(gdn / 1461);
+  gdn %= 1461;
+
+  if (gdn >= 366) {
+    leap = false;
+    gdn--;
+    gy += Math.floor(gdn / 365);
+    gdn %= 365;
+  }
+
+  const sal = [
+    31, leap ? 29 : 28, 31, 30, 31, 30,
+    31, 31, 30, 31, 30, 31
+  ];
+
+  let gm = 0;
+
+  while (gm < 12 && gdn >= sal[gm]) {
+    gdn -= sal[gm++];
+  }
+
+  return [gy, gm + 1, gdn + 1];
+}
 
 // ساخت کد جایزه
 async function createReward() {
-  const code = $("rewardCode").value.trim().normalize("NFC").toUpperCase();
-  const coins = Number($("rewardCoins").value);
+  const code = $("rewardCode")
+    .value.trim()
+    .normalize("NFC")
+    .toUpperCase();
 
-  if (!code || !Number.isSafeInteger(coins) || coins < 0) {
-    showMessage("rewardMessage", "نام کد و مقدار معتبر سکه را وارد کنید.");
+  const coins = Number($("rewardCoins").value);
+  const maxUses = Number($("rewardMaxUses").value || 0);
+
+  const jalali = $("rewardExpires").value
+    .trim()
+    .replace(/[۰-۹]/g, d => "۰۱۲۳۴۵۶۷۸۹".indexOf(d))
+    .replace(/[٠-٩]/g, d => "٠١٢٣٤٥٦٧٨٩".indexOf(d));
+
+  let expiresAt = null;
+
+  if (jalali) {
+    const m = jalali.match(/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})$/);
+
+    if (!m) {
+      showMessage(
+        "rewardMessage",
+        "تاریخ را به شکل سال/ماه/روز شمسی وارد کنید."
+      );
+      return;
+    }
+
+    const g = jalaliToGregorian(+m[1], +m[2], +m[3]);
+
+    if (!g) {
+      showMessage("rewardMessage", "تاریخ شمسی معتبر نیست.");
+      return;
+    }
+
+    expiresAt = new Date(
+      Date.UTC(g[0], g[1] - 1, g[2], 20, 29, 59)
+    ).toISOString();
+  }
+
+  if (
+    !code ||
+    !Number.isSafeInteger(coins) ||
+    coins < 0 ||
+    !Number.isSafeInteger(maxUses) ||
+    maxUses < 0
+  ) {
+    showMessage("rewardMessage", "اطلاعات کد جایزه معتبر نیست.");
     return;
   }
 
   try {
     await api("/api/admin/reward-codes", {
       method: "POST",
-      body: JSON.stringify({ code, coins })
+      body: JSON.stringify({
+        code,
+        coins,
+        maxUses,
+        expiresAt
+      })
     });
 
     $("rewardCode").value = "";
     $("rewardCoins").value = "";
-    showMessage("rewardMessage", "کد جایزه با موفقیت ساخته شد.", true);
+    $("rewardExpires").value = "";
+    $("rewardMaxUses").value = "0";
+
+    showMessage(
+      "rewardMessage",
+      "کد جایزه با موفقیت ساخته شد.",
+      true
+    );
 
     await loadRewards();
     await loadStats();
+
   } catch (error) {
     showMessage("rewardMessage", error.message);
   }
@@ -742,15 +1156,16 @@ async function createReward() {
 // دریافت کدهای جایزه
 async function loadRewards() {
   $("rewardsTable").innerHTML =
-    '<tr><td colspan="4" class="empty">در حال دریافت اطلاعات...</td></tr>';
+    '<tr><td colspan="5" class="empty">در حال دریافت اطلاعات...</td></tr>';
 
   try {
     const result = await api("/api/admin/reward-codes");
     rewards = result.rewardCodes || [];
     renderRewards();
+
   } catch (error) {
     $("rewardsTable").innerHTML =
-      `<tr><td colspan="4" class="empty">${escapeHTML(error.message)}</td></tr>`;
+      `<tr><td colspan="5" class="empty">${escapeHTML(error.message)}</td></tr>`;
   }
 }
 
@@ -758,27 +1173,42 @@ async function loadRewards() {
 function renderRewards() {
   if (!rewards.length) {
     $("rewardsTable").innerHTML =
-      '<tr><td colspan="4" class="empty">هنوز کدی ساخته نشده است.</td></tr>';
+      '<tr><td colspan="5" class="empty">هنوز کدی ساخته نشده است.</td></tr>';
     return;
   }
 
-  $("rewardsTable").innerHTML = rewards.map(reward => `
-    <tr>
-      <td>${escapeHTML(reward.code)}</td>
-      <td>${faNumber(reward.coins)} سکه</td>
-      <td>
-        <span class="status ${reward.active ? "" : "banned"}">
-          ${reward.active ? "فعال" : "غیرفعال"}
-        </span>
-      </td>
-      <td>
-        <button class="btn small-btn ${reward.active ? "btn-red" : "btn-green"}"
-          onclick="toggleReward('${escapeHTML(reward.id)}',${!reward.active})">
-          ${reward.active ? "غیرفعال کردن" : "فعال کردن"}
-        </button>
-      </td>
-    </tr>
-  `).join("");
+  $("rewardsTable").innerHTML = rewards.map(reward => {
+    const used = Number(reward.used_count || 0);
+    const max = Number(reward.max_uses || 0);
+    const remaining = max === 0 ? "نامحدود" : faNumber(Math.max(0, max - used));
+
+    return `
+      <tr>
+        <td>${escapeHTML(reward.code)}</td>
+        <td>${faNumber(reward.coins)} سکه</td>
+        <td>
+          ${reward.expires_at
+            ? new Date(reward.expires_at).toLocaleString("fa-IR")
+            : "بدون انقضا"}
+          <br>
+          استفاده: ${faNumber(used)} / ${max ? faNumber(max) : "نامحدود"}
+          <br>
+          ظرفیت باقی‌مانده: ${remaining}
+        </td>
+        <td>
+          <span class="status ${reward.active ? "" : "banned"}">
+            ${reward.active ? "فعال" : "غیرفعال"}
+          </span>
+        </td>
+        <td>
+          <button class="btn small-btn ${reward.active ? "btn-red" : "btn-green"}"
+            onclick="toggleReward('${escapeHTML(reward.id)}',${!reward.active})">
+            ${reward.active ? "غیرفعال کردن" : "فعال کردن"}
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
 }
 
 // تغییر وضعیت کد جایزه
@@ -791,21 +1221,49 @@ async function toggleReward(id, active) {
 
     await loadRewards();
     await loadStats();
+
   } catch (error) {
     alert(error.message);
   }
 }
+  // شمارش معکوس مسدودی موقت
+function updateBanCountdowns() {
+  document.querySelectorAll(".ban-countdown").forEach(el => {
+    const end = new Date(el.dataset.expires).getTime();
+    const left = Math.max(0, end - Date.now());
 
+    if (!Number.isFinite(end)) return;
 
-function updateBanCountdowns(){document.querySelectorAll('.ban-countdown').forEach(el=>{const end=new Date(el.dataset.expires).getTime(),left=Math.max(0,end-Date.now());if(!Number.isFinite(end))return;if(left<=0){el.textContent='زمان مسدودی تمام شده؛ در حال به‌روزرسانی';return;}const h=Math.floor(left/3600000),m=Math.floor(left%3600000/60000),sec=Math.floor(left%60000/1000);el.textContent='تا رفع مسدودی: '+[h,m,sec].map(n=>String(n).padStart(2,'0')).join(':');});}
-setInterval(updateBanCountdowns,1000);
-// تازه‌سازی اطلاعات بازیکنان برای نمایش تغییرات زنده بازی
-setInterval(()=>{if(token)loadPlayers();},10000);
+    if (left <= 0) {
+      el.textContent = "زمان مسدودی تمام شده؛ در حال به‌روزرسانی";
+      return;
+    }
+
+    const h = Math.floor(left / 3600000);
+    const m = Math.floor((left % 3600000) / 60000);
+    const sec = Math.floor((left % 60000) / 1000);
+
+    el.textContent =
+      "تا رفع مسدودی: " +
+      [h, m, sec].map(n => String(n).padStart(2, "0")).join(":");
+  });
+}
+
+setInterval(updateBanCountdowns, 1000);
+
+// تازه‌سازی اطلاعات بازیکنان هر ۶۰ ثانیه
+setInterval(() => {
+  if (token) loadPlayers();
+}, 60000);
 
 // به‌روزرسانی همه اطلاعات
 async function refreshAll() {
   try {
-    await Promise.all([loadStats(), loadPlayers(), loadRewards()]);
+    await Promise.all([
+      loadStats(),
+      loadPlayers(),
+      loadRewards()
+    ]);
   } catch (error) {
     $("serverStatus").textContent = error.message;
     $("serverStatus").style.color = "#f05b70";
@@ -818,7 +1276,9 @@ $("password").addEventListener("keydown", event => {
 });
 
 $("username").addEventListener("keydown", event => {
-  if (event.key === "Enter") $("password").focus();
+  if (event.key === "Enter") {
+    $("password").focus();
+  }
 });
 </script>
 
