@@ -647,8 +647,7 @@ function toggleTheme() {
 
 applyTheme(localStorage.getItem("bozorgshahr-admin-theme") || "dark");
 
-function faNumber(value) {
-  return Number(value || 0).toLocaleString("fa-IR");
+function faNumber(value) {  return Number(value || 0).toLocaleString("fa-IR");
 }
 
 function showMessage(id, message, success = false) {
@@ -669,10 +668,12 @@ async function api(path, options = {}) {
     headers.Authorization = "Bearer " + token;
   }
 
-  const response = await fetch(API + path, {
-    ...options,
-    headers
-  });
+  let response;
+  try {
+    response = await fetch(API + path, { ...options, headers });
+  } catch (networkError) {
+    throw new Error("ارتباط شبکه با سرور برقرار نشد. وضعیت سرور و اتصال اینترنت را بررسی کنید.");
+  }
 
   const data = await response.json().catch(() => ({}));
 
@@ -975,8 +976,14 @@ async function confirmBan(id) {
 
   try {
     await api("/api/admin/players/" + encodeURIComponent(id) + "/ban", {
-      method: "POST",
-      body: JSON.stringify({ type, reason, durationHours })
+      method: "PATCH",
+      body: JSON.stringify({
+        banned: true,
+        reason,
+        expiresAt: type === "temporary"
+          ? new Date(Date.now() + durationHours * 3600000).toISOString()
+          : null
+      })
     });
 
     closeModal();
@@ -993,7 +1000,7 @@ async function unbanPlayer(id) {
 
   try {
     await api("/api/admin/players/" + encodeURIComponent(id) + "/unban", {
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify({})
     });
 
@@ -1160,7 +1167,7 @@ async function loadRewards() {
 
   try {
     const result = await api("/api/admin/reward-codes");
-    rewards = result.rewardCodes || [];
+    rewards = Array.isArray(result.codes) ? result.codes : (result.rewardCodes || []);
     renderRewards();
 
   } catch (error) {
