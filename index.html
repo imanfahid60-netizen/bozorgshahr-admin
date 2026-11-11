@@ -689,8 +689,7 @@ async function api(path, options = {}) {
 
   return data;
 }
-
-// ورود مدیر
+  // ورود مدیر
 async function login() {
   const username = $("username").value.trim();
   const password = $("password").value;
@@ -851,7 +850,8 @@ function escapeHTML(value) {
     "'": "&#39;"
   })[char]);
 }
-  // نمایش پنجره ویرایش بازیکن
+
+// نمایش پنجره ویرایش بازیکن
 function editPlayer(id) {
   const player = players.find(p => String(p.id) === String(id));
   if (!player) return;
@@ -1015,7 +1015,8 @@ async function unbanPlayer(id) {
 function closeModal() {
   $("modalRoot").innerHTML = "";
 }
-  // تبدیل تاریخ شمسی به میلادی
+
+// تبدیل تاریخ شمسی به میلادی
 function jalaliToGregorian(jy, jm, jd) {
   if (
     jm < 1 || jm > 12 ||
@@ -1233,7 +1234,8 @@ async function toggleReward(id, active) {
     alert(error.message);
   }
 }
-  // شمارش معکوس مسدودی موقت
+
+// شمارش معکوس مسدودی موقت
 function updateBanCountdowns() {
   document.querySelectorAll(".ban-countdown").forEach(el => {
     const end = new Date(el.dataset.expires).getTime();
